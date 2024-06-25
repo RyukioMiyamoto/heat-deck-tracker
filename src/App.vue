@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="game-area">
-      <DeckPile :deck="cardsDeck" @move-to-hand="moveCardToHand" />
+      <DeckPile :deck="cardsDeck" @move-to-hand="moveCardToHand" @add-heat="addHeatCard" :extraHeat="extraHeatCards"/>
       <PlayerHand :playerHand="playerHand" @move-to-discard="moveToDiscardPile"/>
       <DiscardPile :discardPile="discardPile" />
     </div>
@@ -38,10 +38,20 @@ export default {
         { id: 13, value: 5 },
         { id: 14, value: 0 },
         { id: 15, value: 'heat' },
-        { id: 16, value: 'stress' }
+        { id: 16, value: 'stress' },
+        { id: 17, value: 'stress' },
+        { id: 18, value: 'stress' }
       ],
       playerHand: [],
-      discardPile: []
+      discardPile: [],
+      extraHeatCards: [
+        { id: 19, value: 'heat' },
+        { id: 20, value: 'heat' },
+        { id: 21, value: 'heat' },
+        { id: 22, value: 'heat' },
+        { id: 23, value: 'heat' },
+        { id: 24, value: 'heat' },
+      ]
     };
   },
 
@@ -64,7 +74,15 @@ export default {
         const [movedCard] = this.playerHand.splice(index, 1);
         this.discardPile.push(movedCard);
       }
-    }
+    },
+
+    addHeatCard(card) {
+      const index = this.extraHeatCards.findIndex(c => c.id === card.id);
+      if (index !== -1) {
+        const [movedCard] = this.extraHeatCards.splice(index, 1);
+        this.discardPile.push(movedCard);
+      }
+    },
   }
 
 };
@@ -76,7 +94,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 1000px;
+  width: 80%;
   margin: 5% auto;
 }
 

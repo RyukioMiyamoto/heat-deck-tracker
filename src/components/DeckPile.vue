@@ -1,4 +1,3 @@
-<!-- DeckPile.vue -->
 <template>
   <div class="deck-pile">
     <h2>Baralho Total</h2>
@@ -10,6 +9,18 @@
         class="card"
       >
         <CardItem :value="card.value" />
+      </div>
+    </div>
+
+    <h3>Cartas Heat e Stress</h3>
+    <div class="heat-cards">
+      <div
+        v-for="card in extraHeat"
+        :key="card.id"
+        @click="addHeatCard(card)"
+        class="card heat-card"
+      >
+        <CardItem value="+heat" />
       </div>
     </div>
   </div>
@@ -26,11 +37,19 @@ export default {
     deck: {
       type: Array,
       required: true
+    },
+    extraHeat: {
+      type: Array,
+      required: true
     }
   },
+
   methods: {
     moveToPlayerHand(card) {
       this.$emit('move-to-hand', card);
+    },
+    addHeatCard(card) {
+      this.$emit('add-heat', card);
     }
   }
 };
@@ -40,12 +59,18 @@ export default {
 .deck-pile {
   margin-bottom: 20px;
 }
+
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.card {
-  cursor: pointer;
+
+.heat-cards {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
+
 </style>

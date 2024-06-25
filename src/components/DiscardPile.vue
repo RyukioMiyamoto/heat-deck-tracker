@@ -29,6 +29,7 @@ export default {
 .discard-pile {
   margin-top: 20px;
 }
+
 .cards {
   display: flex;
   justify-content: center;
