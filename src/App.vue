@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="game-area">
-      <DeckPile :deck="initialCards" @move-to-hand="moveCardToHand" />
+      <DeckPile :deck="cardsDeck" @move-to-hand="moveCardToHand" />
       <PlayerHand :playerHand="playerHand" />
       <DiscardPile :discardPile="discardPile" />
     </div>
@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      initialCards: [
+      cardsDeck: [
         { id: 1, value: 1 },
         { id: 2, value: 1 },
         { id: 3, value: 1 },
@@ -47,11 +47,14 @@ export default {
 
   methods: {
     moveCardToHand(card) {
-      const index = this.initialCards.findIndex(c => c.id === card.id);
-      if (index !== -1) {
-        const [movedCard] = this.initialCards.splice(index, 1);
-        this.playerHand.push(movedCard);
-        console.log(this.playerHand)
+      if (this.playerHand.length < 7) {
+        const index = this.cardsDeck.findIndex(c => c.id === card.id);
+        if (index !== -1) {
+          const [movedCard] = this.cardsDeck.splice(index, 1);
+          this.playerHand.push(movedCard);
+        }
+      } else {
+        console.log('Limite máximo de cartas na mão alcançado.');
       }
     }
   }
