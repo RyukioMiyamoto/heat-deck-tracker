@@ -44,5 +44,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 80%;
+  margin: 10% auto;
 }
 </style>
