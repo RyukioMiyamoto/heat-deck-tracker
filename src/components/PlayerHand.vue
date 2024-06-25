@@ -1,8 +1,10 @@
 <template>
-  <div class="hand">
+  <div class="player-hand">
     <h2>Mão do Jogador</h2>
     <div class="cards">
-      <CardItem v-for="cardItem in hand" :key="cardItem.id" :value="cardItem.value" />
+      <div class="card" v-for="card in playerHand" :key="card.id">
+        <CardItem :value="card.value" />
+      </div>
     </div>
   </div>
 </template>
@@ -15,7 +17,7 @@ export default {
     CardItem
   },
   props: {
-    hand: {
+    playerHand: {
       type: Array,
       required: true
     }
@@ -24,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.hand {
+.player-hand {
   margin-top: 20px;
 }
 .cards {

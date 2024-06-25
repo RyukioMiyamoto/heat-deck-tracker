@@ -1,5 +1,6 @@
+<!-- CardItem.vue -->
 <template>
-  <div class="card">
+  <div class="card-item">
     {{ value }}
   </div>
 </template>
@@ -12,11 +13,11 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.card {
+.card-item {
   width: 100px;
   height: 150px;
   border: 1px solid #ccc;

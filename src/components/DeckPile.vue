@@ -1,8 +1,16 @@
+<!-- DeckPile.vue -->
 <template>
-  <div class="deck">
-    <h2>Pilha de compras</h2>
+  <div class="deck-pile">
+    <h2>Baralho Total</h2>
     <div class="cards">
-      <CardItem v-for="card in deck" :key="card.id" :value="card.value" />
+      <div
+        v-for="card in deck"
+        :key="card.id"
+        @click="moveToPlayerHand(card)"
+        class="card"
+      >
+        <CardItem :value="card.value" />
+      </div>
     </div>
   </div>
 </template>
@@ -19,17 +27,25 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    moveToPlayerHand(card) {
+      this.$emit('move-to-hand', card);
+    }
   }
 };
 </script>
 
 <style scoped>
-.deck {
+.deck-pile {
   margin-bottom: 20px;
 }
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.card {
+  cursor: pointer;
 }
 </style>

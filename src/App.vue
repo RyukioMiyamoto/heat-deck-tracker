@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="game-area">
-      <DeckPile :deck="initialCards" />
+      <DeckPile :deck="initialCards" @move-to-hand="moveCardToHand" />
       <PlayerHand :playerHand="playerHand" />
       <DiscardPile :discardPile="discardPile" />
     </div>
@@ -43,8 +43,21 @@ export default {
       playerHand: [],
       discardPile: []
     };
+  },
+
+  methods: {
+    moveCardToHand(card) {
+      const index = this.initialCards.findIndex(c => c.id === card.id);
+      if (index !== -1) {
+        const [movedCard] = this.initialCards.splice(index, 1);
+        this.playerHand.push(movedCard);
+        console.log(this.playerHand)
+      }
+    }
   }
+
 };
+
 </script>
 
 <style>
