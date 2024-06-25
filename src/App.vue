@@ -1,22 +1,28 @@
 <template>
   <div id="app">
-    <div class="card-container">
-      <CardItem v-for="card in cards" :key="card.id" :value="card.value" />
+    <div class="game-area">
+      <DeckPile :deck="initialCards" />
+      <PlayerHand :playerHand="playerHand" />
+      <DiscardPile :discardPile="discardPile" />
     </div>
   </div>
 </template>
 
 <script>
-import CardItem from './components/CardItem.vue';
+import DeckPile from './components/DeckPile.vue';
+import DiscardPile from './components/DiscardPile.vue';
+import PlayerHand from './components/PlayerHand.vue';
 
 export default {
   name: 'App',
   components: {
-    CardItem
+    DeckPile,
+    PlayerHand,
+    DiscardPile
   },
   data() {
     return {
-      cards: [
+      initialCards: [
         { id: 1, value: 1 },
         { id: 2, value: 1 },
         { id: 3, value: 1 },
@@ -33,18 +39,20 @@ export default {
         { id: 14, value: 0 },
         { id: 15, value: 'heat' },
         { id: 16, value: 'stress' }
-      ]
+      ],
+      playerHand: [],
+      discardPile: []
     };
   }
 };
 </script>
 
 <style>
-.card-container {
+.game-area {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  width: 80%;
-  margin: 10% auto;
+  width: 1000px;
+  margin: 5% auto;
 }
 </style>
