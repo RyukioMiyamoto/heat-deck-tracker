@@ -2,7 +2,9 @@
   <div class="discard-pile">
     <h2>Pilha de Descarte</h2>
     <div class="cards">
-      <CardItem v-for="card in discardPile" :key="card.id" :value="card.value" />
+      <div v-for="card in discardPile" :key="card.id" class="card">
+        <CardItem :value="card.value" />
+      </div>
     </div>
   </div>
 </template>
@@ -30,5 +32,6 @@ export default {
 .cards {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 </style>

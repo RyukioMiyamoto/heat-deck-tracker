@@ -2,7 +2,12 @@
   <div class="player-hand">
     <h2>Mão do Jogador</h2>
     <div class="cards">
-      <div class="card" v-for="card in playerHand" :key="card.id">
+      <div
+        class="card-container"
+        v-for="card in playerHand"
+        :key="card.id"
+        @click="moveToDiscardPile(card)"
+      >
         <CardItem :value="card.value" />
       </div>
     </div>
@@ -21,6 +26,11 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    moveToDiscardPile(card) {
+      this.$emit('move-to-discard', card);
+    }
   }
 };
 </script>
@@ -29,8 +39,19 @@ export default {
 .player-hand {
   margin-top: 20px;
 }
+
 .cards {
   display: flex;
   justify-content: center;
+}
+
+.card-container {
+  width: 100px;
+  height: 150px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 </style>
